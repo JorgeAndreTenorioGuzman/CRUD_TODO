@@ -11,6 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.crudtodo.presentation.CreateTodo
+import com.example.crudtodo.presentation.TODOListsScreen
+import com.example.crudtodo.presentation.util.Screen
 import com.example.crudtodo.ui.theme.CRUDTODOTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +27,27 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CRUDTODOTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                SetupNavGraph()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CRUDTODOTheme {
-        Greeting("Android")
+fun SetupNavGraph(
+    navController: NavHostController = rememberNavController(),
+    startDestination: String = Screen.todoListsScreen.route
+) {
+    NavHost(
+        navController = navController,
+        startDestination = startDestination
+    ) {
+        composable(route = Screen.createTodoScreen.route ){
+            TODOListsScreen(navController = navController)
+        }
+        composable(route = Screen.todoListsScreen.route){
+            CreateTodo(navController = navController)
+        }
     }
+
 }

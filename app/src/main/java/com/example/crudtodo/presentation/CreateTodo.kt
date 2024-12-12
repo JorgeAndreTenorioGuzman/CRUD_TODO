@@ -24,16 +24,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.crudtodo.presentation.util.Screen
 
 @Composable
-fun CreateTodo(modifier: Modifier = Modifier, viewModel: TodoViewModel = hiltViewModel()) {
+fun CreateTodo(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    viewModel: TodoViewModel = hiltViewModel()
+) {
     val titleState = viewModel.todoItemTitle.value
 
 
     Scaffold(
         bottomBar = { BottomAppBar {
-            Text(text = "Create Todo",modifier = Modifier.clickable {  })
-            Text(text = "TODO lists", modifier = Modifier.clickable {  })
+            Text(text = "Create Todo",modifier = Modifier.clickable { navController.navigate(Screen.createTodoScreen.route) })
+            Text(text = "TODO lists", modifier = Modifier.clickable { navController.navigate(Screen.todoListsScreen.route)  })
         }}
     ) { paddingValues ->
 
