@@ -1,4 +1,4 @@
-package com.example.crudtodo.data
+package com.example.crudtodo.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

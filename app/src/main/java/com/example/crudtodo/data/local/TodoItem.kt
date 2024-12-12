@@ -1,4 +1,4 @@
-package com.example.crudtodo.data
+package com.example.crudtodo.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
