@@ -10,4 +10,8 @@ interface TodoRepository {
 
     suspend fun getApiTodos(): List<TodoItem>
 
+    suspend fun deleteTodo(todoItem: TodoItem)
+
+    suspend fun updateCompletionState(todoId: Int, newState: Boolean)
+
 }

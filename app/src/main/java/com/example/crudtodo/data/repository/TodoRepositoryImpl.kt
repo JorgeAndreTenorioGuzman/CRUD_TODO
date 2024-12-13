@@ -20,4 +20,12 @@ class TodoRepositoryImpl(
     override suspend fun getApiTodos(): List<TodoItem> {
         return ApiService.todoApiService.getTodos()
     }
+
+    override suspend fun deleteTodo(todoItem: TodoItem) {
+        dao.deleteTodo(todoItem)
+    }
+
+    override suspend fun updateCompletionState(todoId: Int, newState: Boolean) {
+        dao.updateCompletionState(todoId, newState)
+    }
 }

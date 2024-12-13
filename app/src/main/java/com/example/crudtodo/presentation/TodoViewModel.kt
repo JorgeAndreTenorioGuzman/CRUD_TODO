@@ -65,5 +65,21 @@ class TodoViewModel @Inject constructor (
         }
     }
 
+    fun deleteTodo(todoItem: TodoItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteTodo(todoItem)
+            getLocalTodos()
+        }
+    }
+
+    fun updateCompletionState(todoItem: TodoItem){
+        viewModelScope.launch(Dispatchers.IO) {
+            val newState = !todoItem.completed
+            todoItem.id?.let { repository.updateCompletionState(it, newState) }
+            getLocalTodos()
+
+        }
+    }
+
 
 }
