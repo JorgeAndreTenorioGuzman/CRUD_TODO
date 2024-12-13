@@ -7,12 +7,12 @@
 4. [License](#license)
 
 ## About the Project
-This a CRUD TODO app for Android, developed using Jetpack Compose, Clean Architecture, Room, and Retrofit.
+This is a CRUD TODO app for Android developed using Kotlin, Jetpack Compose, Clean Architecture, Room, Retrofit, and Dagger Hilt.
 
 ## Features
 
 ### 1. Fetch Remote TODO
-Read the remote TODO from the API as a scrollable list of cards.
+Read the remote TODO from https://jsonplaceholder.typicode.com/ as a scrollable list of cards.
 
 ### 2. Create TODO 
 Create a new local TODO and save it locally.
