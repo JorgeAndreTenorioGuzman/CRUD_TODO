@@ -1,6 +1,7 @@
 package com.example.crudtodo.presentation
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -77,24 +79,29 @@ fun TODOListsScreen(
                     } else {
                         items(localTodos) { todo ->
                             Card {
-                                Column(modifier = Modifier.padding(8.dp)) {
-                                    Icon(
-                                        imageVector = Icons.Default.Delete,
-                                        modifier = Modifier
-                                            .clickable { viewModel.deleteTodo(todo) }
-                                            .align(Alignment.End),
-                                        contentDescription = "delete todo",
-                                    )
-                                    Row {
-                                        Text(text = todo.title, modifier = Modifier.weight(1f))
-                                        Text(
+                                    Row (modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
+                                        Text(text = todo.title, modifier = Modifier.weight(2f))
+                                        Checkbox(
+                                            checked = todo.completed,
+                                            modifier = Modifier.weight(1f),
+                                            onCheckedChange = { viewModel.updateCompletionState(todo) }
+                                        )
+                                        Icon(
+                                            imageVector = Icons.Default.Delete,
+                                            modifier = Modifier
+                                                .clickable { viewModel.deleteTodo(todo)}
+                                                .weight(1f),
+                                                //.align(Alignment.End),
+                                            contentDescription = "delete todo",
+                                        )
+                                        /*Text(
                                             text = "${todo.completed}",
                                             modifier = Modifier
                                                 .weight(1f)
                                                 .clickable { viewModel.updateCompletionState(todo) }
-                                        )
+                                        )*/
                                     }
-                                }
+
                             }
                             Spacer(modifier = Modifier.height(8.dp))
                         }
@@ -114,9 +121,10 @@ fun TODOListsScreen(
                 ) {
                     items(remoteTodos) { todo ->
                         Card {
-                            Row(modifier = Modifier.padding(8.dp)) {
+                            Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Text(text = todo.title, modifier = Modifier.weight(1f))
-                                Text(text = "${todo.completed}", modifier = Modifier.weight(1f))
+                                Checkbox(checked = todo.completed, onCheckedChange = {viewModel.updateCompletionState(todo)})
+                                //Text(text = "${todo.completed}", modifier = Modifier.weight(1f))
                             }
                         }
                         Spacer(modifier = Modifier.height(8.dp))
