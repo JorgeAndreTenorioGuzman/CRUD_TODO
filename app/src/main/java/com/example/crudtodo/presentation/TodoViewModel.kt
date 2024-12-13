@@ -30,19 +30,23 @@ class TodoViewModel @Inject constructor (
 
 
     init {
-        getRemoteTodos()
-        getLocalTodos()
+        viewModelScope.launch(Dispatchers.IO) {
+            getRemoteTodos()
+            getLocalTodos()
+        }
     }
 
     fun getRemoteTodos() {
-        viewModelScope.launch {
-            _remoteTodos.value = repository.getApiTodos()
+        viewModelScope.launch(Dispatchers.IO) {
+            val remoteData = repository.getApiTodos()
+            _remoteTodos.value = remoteData
         }
     }
 
     fun getLocalTodos() {
-        viewModelScope.launch {
-            _localTodos.value = repository.getLocalTodos()
+        viewModelScope.launch(Dispatchers.IO) {
+            val localData = repository.getLocalTodos()
+            _localTodos.value = localData
         }
     }
 
@@ -56,7 +60,7 @@ class TodoViewModel @Inject constructor (
             title = todoItemTitle.value,
             completed = false
         )
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.insertTodo(todo)
         }
     }
