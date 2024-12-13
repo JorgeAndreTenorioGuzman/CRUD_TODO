@@ -20,7 +20,9 @@ import com.example.crudtodo.presentation.CreateTodo
 import com.example.crudtodo.presentation.TODOListsScreen
 import com.example.crudtodo.presentation.util.Screen
 import com.example.crudtodo.ui.theme.CRUDTODOTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -6,13 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crudtodo.data.local.TodoItem
 import com.example.crudtodo.domain.repository.TodoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class TodoViewModel(private val repository: TodoRepository): ViewModel() {
+@HiltViewModel
+class TodoViewModel @Inject constructor (
+    private val repository: TodoRepository
+): ViewModel() {
 
     private val _localTodos = MutableStateFlow<List<TodoItem>>(emptyList())
     val localTodos: StateFlow<List<TodoItem>> = _localTodos
