@@ -62,60 +62,67 @@ fun TODOListsScreen(
                 .padding(paddingValues)
 
         ){
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                if (localTodos.isEmpty()) {
-                    item {
-                        Text("No local todos found!")
-                    }
-                } else{
-                    items(localTodos) { todo ->
-                        Card {
-                            Column(modifier = Modifier.padding(8.dp)) {
-                                Icon(
-                                    imageVector = Icons.Default.Delete,
-                                    modifier = Modifier
-                                        .clickable {viewModel.deleteTodo(todo)}
-                                        .align(Alignment.End),
-                                    contentDescription = "delete todo",
-                                )
-                                Row {
-                                    Text(text = todo.title, modifier = Modifier.weight(1f))
-                                    Text(
-                                        text = "${todo.completed}",
+            Column (modifier = Modifier.weight(1f)) {
+                Text(text = "Local TODO")
+                LazyColumn(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    if (localTodos.isEmpty()) {
+                        item {
+                            Text("No local todos found!")
+                        }
+                    } else {
+                        items(localTodos) { todo ->
+                            Card {
+                                Column(modifier = Modifier.padding(8.dp)) {
+                                    Icon(
+                                        imageVector = Icons.Default.Delete,
                                         modifier = Modifier
-                                            .weight(1f)
-                                            .clickable {viewModel.updateCompletionState(todo) }
+                                            .clickable { viewModel.deleteTodo(todo) }
+                                            .align(Alignment.End),
+                                        contentDescription = "delete todo",
                                     )
+                                    Row {
+                                        Text(text = todo.title, modifier = Modifier.weight(1f))
+                                        Text(
+                                            text = "${todo.completed}",
+                                            modifier = Modifier
+                                                .weight(1f)
+                                                .clickable { viewModel.updateCompletionState(todo) }
+                                        )
+                                    }
                                 }
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
+                    }
+
+                }
+            }
+
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(text = "Remote TODO")
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    items(remoteTodos) { todo ->
+                        Card {
+                            Row(modifier = Modifier.padding(8.dp)) {
+                                Text(text = todo.title, modifier = Modifier.weight(1f))
+                                Text(text = "${todo.completed}", modifier = Modifier.weight(1f))
                             }
                         }
                         Spacer(modifier = Modifier.height(8.dp))
                     }
+
                 }
-
-            }
-
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                items(remoteTodos) { todo ->
-                    Card {
-                        Row(modifier = Modifier.padding(8.dp)) {
-                            Text(text = todo.title, modifier = Modifier.weight(1f))
-                            Text(text = "${todo.completed}", modifier = Modifier.weight(1f))
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
-
             }
         }
     }
