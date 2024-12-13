@@ -28,8 +28,8 @@ fun TODOListsScreen(
     viewModel: TodoViewModel = hiltViewModel()
 ) {
 
-    val localTodos = viewModel.localTodos.collectAsState().value
-    val remoteTodos = viewModel.remoteTodos.collectAsState().value
+    val localTodos = viewModel.localTodos.collectAsState(initial = emptyList()).value
+    val remoteTodos = viewModel.remoteTodos.collectAsState(initial = emptyList()).value
 
     Scaffold(
         bottomBar = { BottomAppBar {
@@ -47,25 +47,31 @@ fun TODOListsScreen(
         ){
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .weight(1f)
                     .padding(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                items(localTodos) { todo ->
-                    Card {
-                        Row {
-                            Text(text = todo.title, modifier = Modifier.weight(1f))
-                            Text(text = "${todo.completed}", modifier = Modifier.weight(1f))
-                        }
+                if (localTodos.isEmpty()) {
+                    item {
+                        Text("No local todos found!")
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
+                } else{
+                    items(localTodos) { todo ->
+                        Card {
+                            Row {
+                                Text(text = todo.title, modifier = Modifier.weight(1f))
+                                Text(text = "${todo.completed}", modifier = Modifier.weight(1f))
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(16.dp))
+                    }
                 }
 
             }
 
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .weight(1f)
                     .padding(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
