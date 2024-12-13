@@ -50,7 +50,7 @@ fun CreateTodo(
         ){
             TextField(value = titleState, onValueChange = {viewModel.addTitle(it)})
             Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { viewModel.addTitle(titleState) }) {
+            Button(onClick = { viewModel.addTodoToLocal()}) {
                 Text(text = "Add Todo")
             }
         }
