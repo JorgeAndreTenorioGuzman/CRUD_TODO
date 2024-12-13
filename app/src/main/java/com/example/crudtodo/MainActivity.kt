@@ -44,10 +44,10 @@ fun SetupNavGraph(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(route = Screen.createTodoScreen.route ){
+        composable(route = Screen.todoListsScreen.route ){
             TODOListsScreen(navController = navController)
         }
-        composable(route = Screen.todoListsScreen.route){
+        composable(route = Screen.createTodoScreen.route){
             CreateTodo(navController = navController)
         }
     }
