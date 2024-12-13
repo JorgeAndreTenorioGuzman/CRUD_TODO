@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface TodoDao {
 
-    @Query("Select * FROM todos")
+    @Query("Select * FROM todoitem")
     fun getTodos(): List<TodoItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
