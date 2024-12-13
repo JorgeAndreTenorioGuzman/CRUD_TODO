@@ -22,6 +22,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -38,8 +39,20 @@ fun CreateTodo(
 
     Scaffold(
         bottomBar = { BottomAppBar {
-            Text(text = "Create Todo",modifier = Modifier.clickable { navController.navigate(Screen.createTodoScreen.route) })
-            Text(text = "TODO lists", modifier = Modifier.clickable { navController.navigate(Screen.todoListsScreen.route)  })
+            Text(
+                text = "Create Todo",
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .clickable { navController.navigate(Screen.createTodoScreen.route) }
+                    .weight(1f)
+            )
+            Text(
+                text = "TODO lists",
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .clickable { navController.navigate(Screen.todoListsScreen.route) }
+                    .weight(1f)
+            )
         }}
     ) { paddingValues ->
 
