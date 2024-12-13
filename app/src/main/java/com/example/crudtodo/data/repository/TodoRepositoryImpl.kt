@@ -9,7 +9,7 @@ import com.example.crudtodo.domain.repository.TodoRepository
 class TodoRepositoryImpl(
     private val dao: TodoDao,
 ): TodoRepository {
-    override fun getLocalTodos(): List<TodoItem> {
+    override suspend fun getLocalTodos(): List<TodoItem> {
         return dao.getTodos()
     }
 
