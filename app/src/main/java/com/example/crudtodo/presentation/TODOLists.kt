@@ -62,11 +62,13 @@ fun TODOListsScreen(
                 } else{
                     items(localTodos) { todo ->
                         Card {
-                            Column {
+                            Column(modifier = Modifier.padding(8.dp)) {
                                 Icon(
                                     imageVector = Icons.Default.Delete,
-                                    modifier = Modifier.clickable {viewModel.deleteTodo(todo)},
-                                    contentDescription = "delete todo"
+                                    modifier = Modifier
+                                        .clickable {viewModel.deleteTodo(todo)}
+                                        .align(Alignment.End),
+                                    contentDescription = "delete todo",
                                 )
                                 Row {
                                     Text(text = todo.title, modifier = Modifier.weight(1f))
@@ -79,7 +81,7 @@ fun TODOListsScreen(
                                 }
                             }
                         }
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
                     }
                 }
 
@@ -93,12 +95,12 @@ fun TODOListsScreen(
             ) {
                 items(remoteTodos) { todo ->
                     Card {
-                        Row {
+                        Row(modifier = Modifier.padding(8.dp)) {
                             Text(text = todo.title, modifier = Modifier.weight(1f))
                             Text(text = "${todo.completed}", modifier = Modifier.weight(1f))
                         }
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
 
             }
