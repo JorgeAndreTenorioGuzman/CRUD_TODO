@@ -1,6 +1,7 @@
 package com.example.crudtodo.presentation
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -40,7 +41,7 @@ fun CreateTodo(
     Scaffold(
         bottomBar = { BottomAppBar {
             Text(
-                text = "Create Todo",
+                text = "Create TODO",
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .clickable { navController.navigate(Screen.createTodoScreen.route) }
@@ -60,6 +61,8 @@ fun CreateTodo(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ){
             TextField(value = titleState, onValueChange = {viewModel.addTitle(it)})
             Spacer(modifier = Modifier.height(8.dp))
